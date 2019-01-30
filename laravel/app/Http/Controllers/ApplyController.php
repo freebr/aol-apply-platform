@@ -938,5 +938,3 @@ class ApplyController extends Controller
 		return redirect()->route('admin.apply');
 	}
 }
-
-?>

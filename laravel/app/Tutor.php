@@ -31,5 +31,3 @@ class Tutor extends Model
 		return $arr;
 	}
 }
-
-?>

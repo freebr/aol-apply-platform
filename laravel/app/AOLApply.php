@@ -72,5 +72,3 @@ class AOLApply extends Model
 				    ->with('author');
 	}
 }
-
-?>

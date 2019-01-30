@@ -150,5 +150,3 @@ class CourseGroupController extends Controller
 		return redirect()->route('admin.course-group');
 	}
 }
-
-?>

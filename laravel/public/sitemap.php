@@ -30,4 +30,3 @@
 	'student.apply.drop'=>'删除AOL助教申请',
 	'student.apply.export'=>'导出AOL申请信息',
 ]
-?>
