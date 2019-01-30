@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://www.cnblogs.com/jianqingwang/p/6830892.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="never">
+<title>利用PHPExcel读取Excel的数据和导出数据到Excel - 简庆旺 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/bundle-BlueSky.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/bundle-BlueSky-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/jianqingwang/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/jianqingwang/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/jianqingwang/wlwmanifest.xml">
+<script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'jianqingwang', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/jianqingwang/"><img id="blogLogo" src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/jianqingwang/">简庆旺的博客</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/jianqingwang/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E7%AE%80%E5%BA%86%E6%97%BA">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/jianqingwang/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/jianqingwang/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 115&nbsp; </span>
+<span id="stats_article_count">文章 - 1&nbsp; </span>
+<span id="stats-comment_count">评论 - 25</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jianqingwang/p/6830892.html">利用PHPExcel读取Excel的数据和导出数据到Excel</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p>PHPExcel是一个PHP类库，用来帮助我们简单、高效实现从Excel读取Excel的数据和导出数据到Excel。也是我们日常开发中，经常会遇到的使用场景。比如有个客户信息表，要批量导出发给同事，我们就可以用PHPExcel来快速实现。同样，如果我们要利用短信群发接口去群发信息，PHPExcel可以快速导入客户信息，避免人工录入信息的麻烦。</p>
+<p>PHPExcel使用教程：</p>
+<p>首先下载PHPExcel</p>
+<p>到https://github.com/PHPOffice/PHPExcel下载PHPExcel，如果不懂得使用git，可以到这https://codeload.github.com/PHPOffice/PHPExcel/zip/1.8下载压缩包，懂得的自行用git下载。</p>
+<p>下载好文件，解压可以得到如下文件：</p>
+<p><img class="size-full wp-image-157" src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/1-10.jpg" alt="" width="635" height="328">PHPExcel</p>
+<p>好了，现在我们就可以用PHPExcel愉快的读取和制作表格了！</p>
+<p>PHPExcel DEMO1：利用PHPExcel读取excel信息：</p>
+<p>我们在根目录创建一个名为read.php的文件来读取文档，创建一个test.xlsx的文件，里面写的信息如下：</p>
+<p><img class="alignnone size-full wp-image-158" src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/1-11.jpg" alt="" width="355" height="562"></p>
+<p>然后在read.php写以下代码：</p>
+<blockquote>
+<p>&lt;?php<br>include ‘./Classes/PHPExcel/IOFactory.php’;</p>
+<p>$inputFileName = ‘./test.xls’;<br>date_default_timezone_set(‘PRC’);<br>// 读取excel文件<br>try {<br>$inputFileType = PHPExcel_IOFactory::identify($inputFileName);<br>$objReader = PHPExcel_IOFactory::createReader($inputFileType);<br>$objPHPExcel = $objReader-&gt;load($inputFileName);<br>} catch(Exception $e) {<br>die(‘加载文件发生错误：”‘.pathinfo($inputFileName,PATHINFO_BASENAME).'”: ‘.$e-&gt;getMessage());<br>}</p>
+<p>// 确定要读取的sheet，什么是sheet，看excel的右下角，真的不懂去百度吧<br>$sheet = $objPHPExcel-&gt;getSheet(0);<br>$highestRow = $sheet-&gt;getHighestRow();<br>$highestColumn = $sheet-&gt;getHighestColumn();</p>
+<p>// 获取一行的数据<br>for ($row = 1; $row &lt;= $highestRow; $row++){<br>// Read a row of data into an array<br>$rowData = $sheet-&gt;rangeToArray(‘A’ . $row . ‘:’ . $highestColumn . $row, NULL, TRUE, FALSE);<br>//这里得到的rowData都是一行的数据，得到数据后自行处理，我们这里只打出来看看效果<br>var_dump($rowData);<br>echo “&lt;br&gt;”;</p>
+<p>}</p>
+
+</blockquote>
+<p>得到的数据：</p>
+<p>
+<img class="size-full wp-image-159 below-entry-meta" src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/1-12.jpg" alt="" width="1029" height="125">PHPexcel读取文件</p>
+<p>PHPExcel DEMO2：利用PHPExcel导出信息到excel：</p>
+<blockquote>
+<pre>&lt;?php
+
+
+/** Error reporting */
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+date_default_timezone_set('PRC');
+
+
+/** 引入PHPExcel */
+require_once dirname(__FILE__) . './Classes/PHPExcel.php';
+
+// 创建Excel文件对象
+$objPHPExcel = new PHPExcel();
+// 设置文档信息，这个文档信息windows系统可以右键文件属性查看
+$objPHPExcel-&gt;getProperties()-&gt;setCreator("作者简庆旺")
+    -&gt;setLastModifiedBy("最后更改者")
+    -&gt;setTitle("文档标题")
+    -&gt;setSubject("文档主题")
+    -&gt;setDescription("文档的描述信息")
+    -&gt;setKeywords("设置文档关键词")
+    -&gt;setCategory("设置文档的分类");
+
+
+//根据excel坐标，添加数据
+$objPHPExcel-&gt;setActiveSheetIndex(0)
+    -&gt;setCellValue('A1', '你好')
+    -&gt;setCellValue('B2', '世界')
+    -&gt;setCellValue('C1', '你好')
+    -&gt;setCellValue('D2', '世界');
+
+// 混杂各种符号, 编码为UTF-8
+$objPHPExcel-&gt;setActiveSheetIndex(0)
+    -&gt;setCellValue('A4', 'Miscellaneous glyphs')
+    -&gt;setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
+
+
+$objPHPExcel-&gt;getActiveSheet()-&gt;setCellValue('A8',"你好世界");
+$objPHPExcel-&gt;getActiveSheet()-&gt;getRowDimension(8)-&gt;setRowHeight(-1);
+$objPHPExcel-&gt;getActiveSheet()-&gt;getStyle('A8')-&gt;getAlignment()-&gt;setWrapText(true);
+
+
+$value = "-ValueA\n-Value B\n-Value C";
+$objPHPExcel-&gt;getActiveSheet()-&gt;setCellValue('A10', $value);
+$objPHPExcel-&gt;getActiveSheet()-&gt;getRowDimension(10)-&gt;setRowHeight(-1);
+$objPHPExcel-&gt;getActiveSheet()-&gt;getStyle('A10')-&gt;getAlignment()-&gt;setWrapText(true);
+$objPHPExcel-&gt;getActiveSheet()-&gt;getStyle('A10')-&gt;setQuotePrefix(true);
+
+
+// 重命名工作sheet
+$objPHPExcel-&gt;getActiveSheet()-&gt;setTitle('第一个sheet');
+
+// 设置第一个sheet为工作的sheet
+$objPHPExcel-&gt;setActiveSheetIndex(0);
+
+// 保存Excel 2007格式文件，保存路径为当前路径，名字为export.xlsx
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter-&gt;save( 'export.xlsx');
+
+
+// 保存Excel 95格式文件，，保存路径为当前路径，
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+$objWriter-&gt;save('export.xls');
+
+</pre>
+</blockquote>
+<p>好了，执行后我们可以得到export.xls和export.xlsx，如果使用过程遇到问题，可以联系本博客答疑。</p>
+<p>本人博客：<a href="http://www.wangtuizhijia.com/archives/156" target="_blank">利用PHPExcel读取Excel的数据和导出数据到Excel</a></p></div><div id="MySignature" style="display: block;"><!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_qzone">QQ空间</a>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_weixin">微信</a>
+	<a class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" href="http://www.jiathis.com/share?uid=1687249" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+
+
+<!-- JiaThis Button END --></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/jianqingwang/category/872872.html" target="_blank">php</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(6830892,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;62d9a286-9b63-e611-9fc1-ac853d9f53cc&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/jianqingwang/" target="_blank"><img src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/20160816183133.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/jianqingwang/">简庆旺</a><br>
+            <a href="http://home.cnblogs.com/u/jianqingwang/followees">关注 - 0</a><br>
+            <a href="http://home.cnblogs.com/u/jianqingwang/followers">粉丝 - 18</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;62d9a286-9b63-e611-9fc1-ac853d9f53cc&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(6830892,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(6830892,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">1</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/jianqingwang/p/6829984.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/jianqingwang/p/6829984.html" title="发布于2017-05-09 12:04">从数据库、代码和服务器对PHP网站Mysql做性能优化</a><br><a href="http://www.cnblogs.com/jianqingwang/p/6836660.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/jianqingwang/p/6836660.html" title="发布于2017-05-10 16:32">利用有道翻译Api实现英文翻译功能</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2017-05-09 15:44</span> <a href="http://www.cnblogs.com/jianqingwang/">简庆旺</a> 阅读(<span id="post_view_count">7904</span>) 评论(<span id="post_comment_count">1</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=6830892" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/jianqingwang/p/6830892.html#" onclick="AddToWz(6830892);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=299981,cb_entryId=6830892,cb_blogApp=currentBlogApp,cb_blogUserGuid='62d9a286-9b63-e611-9fc1-ac853d9f53cc',cb_entryCreatedDate='2017/5/9 15:44:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/jianqingwang/p/6830892.html#3722533" class="layer">#1楼</a><a name="3722533" id="comment_anchor_3722533"></a><span id="comment-maxId" style="display:none;">3722533</span><span id="comment-maxDate" style="display:none;">2017/6/26 10:21:19</span>  <span class="comment_date">2017-06-26 10:21</span> <a id="a_comment_author_3722533" href="http://home.cnblogs.com/u/1189027/" target="_blank">王秋生</a> <a href="http://msg.cnblogs.com/send/%E7%8E%8B%E7%A7%8B%E7%94%9F" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3722533" class="blog_comment_body">你好遇到点问题,能加下我QQ好友我咨询下几个问题吗? 我的QQ468292155</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3722533,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3722533,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/jianqingwang/p/6830892.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/jianqingwang/p/6830892.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="http://clickc.admaster.com.cn/c/a105960,b2436453,c1705,i0,m101,8a1,8b2,h" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-DevCloud&#39;)">【推荐】华为云7大明星产品0元免费使用</a><br><a href="https://cloud.tencent.com/act/mid-year?fromSource=gwzcw.945655.945655.945655" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-T2-腾讯云&#39;)">【活动】腾讯云释放技术红利，热门云产品3折起</a><br><a href="http://challenge.xfyun.cn/?ch=bk" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-xfyun&#39;)">【大赛】2018首届“顶天立地”AI开发者大赛</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C1&#39;);" href="https://cloud.tencent.com/product/tac?fromSource=gwzcw.945615.945615.945615" target="_blank"><img width="300" height="250" src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/24442-20180530101048589-14642248.jpg" alt="腾讯云0530"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/598011/" target="_blank">外媒称三星正在研发“Sound On Display”技术</a><br> ·  <a href="https://news.cnblogs.com/n/598014/" target="_blank">特斯拉Model 3修复刹车问题 重新获消费者报告推荐</a><br> ·  <a href="https://news.cnblogs.com/n/598013/" target="_blank">微软Future Decoded大会定于10月31日在伦敦展览中心举行</a><br> ·  <a href="https://news.cnblogs.com/n/598012/" target="_blank">苹果在圣克拉拉县租赁新办公大楼 湾区扩建工作继续进行</a><br> ·  <a href="https://news.cnblogs.com/n/598008/" target="_blank">圆通速递拟4.5亿增资浙江驿栈 快递末端服务盈利尚难</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/34770/" target="_blank"><img src="./利用PHPExcel读取Excel的数据和导出数据到Excel_files/TB1gBPhgZLJ8KJjy0FnXXcFDpXa-468-60.jpg" alt="" style="width: 468px; height: 60px;"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/576411/" target="_blank">你可以把编程当做一项托付终身的职业</a><br> ·  <a href="http://kb.cnblogs.com/page/596164/" target="_blank">评审的艺术——谈谈现实中的代码评审</a><br> ·  <a href="http://kb.cnblogs.com/page/577233/" target="_blank">如何高效学习</a><br> ·  <a href="http://kb.cnblogs.com/page/578689/" target="_blank">如何成为优秀的程序员？</a><br> ·  <a href="http://kb.cnblogs.com/page/594930/" target="_blank">菜鸟工程师的超神之路 -- 从校园到职场</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/jianqingwang/">简庆旺</a><br>园龄：<a href="https://home.cnblogs.com/u/jianqingwang/" title="入园时间：2016-08-16">1年9个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/jianqingwang/followers/">18</a><br>关注：<a href="https://home.cnblogs.com/u/jianqingwang/followees/">0</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;62d9a286-9b63-e611-9fc1-ac853d9f53cc&#39;)">+加关注</a></div><script>getFollowStatus('62d9a286-9b63-e611-9fc1-ac853d9f53cc')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/04/01&#39;);return false;">&lt;</a></td><td align="center">2018年5月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/06/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td class="CalWeekendDay" align="center">5</td></tr><tr><td class="CalWeekendDay" align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td class="CalWeekendDay" align="center">12</td></tr><tr><td class="CalWeekendDay" align="center">13</td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td class="CalWeekendDay" align="center">19</td></tr><tr><td class="CalWeekendDay" align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td class="CalWeekendDay" align="center">26</td></tr><tr><td class="CalWeekendDay" align="center">27</td><td align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalTodayDay" align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td></tr><tr><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/jianqingwang/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/jianqingwang/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/jianqingwang/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/jianqingwang/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/jianqingwang/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/jianqingwang/tag/php/">php</a>(19)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/jquery/">jquery</a>(2)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/ajax/">ajax</a>(2)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/PhpStorm/">PhpStorm</a>(2)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/php%E6%9F%A5%E8%AF%A2%E6%89%8B%E6%9C%BA%E5%BD%92%E5%B1%9E%E5%9C%B0/">php查询手机归属地</a>(1)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/php%E6%89%93%E6%B0%B4%E5%8D%B0/">php打水印</a>(1)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/php%E8%AF%BB%E5%8F%96%E6%96%87%E6%A1%A3%E7%9A%84%E5%86%85%E5%AE%B9/">php读取文档的内容</a>(1)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/php%E5%88%86%E9%A1%B5%E5%8E%9F%E7%90%86/">php分页原理</a>(1)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/php%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%90%8D/">php获取随机文件名</a>(1)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/php%E8%BF%9E%E6%8E%A5mysqli%E6%95%B0%E6%8D%AE%E5%BA%93/">php连接mysqli数据库</a>(1)</li><li><a href="http://www.cnblogs.com/jianqingwang/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/jianqingwang/category/878465.html">ajax</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/jianqingwang/category/878468.html">discuz</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/jianqingwang/category/872875.html">divcss</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/jianqingwang/category/872874.html">jquery(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/jianqingwang/category/872873.html">js(9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="https://www.cnblogs.com/jianqingwang/category/876746.html">json(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="https://www.cnblogs.com/jianqingwang/category/902575.html">linux(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="https://www.cnblogs.com/jianqingwang/category/884376.html">mysql(9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="https://www.cnblogs.com/jianqingwang/category/872872.html">php(77)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="https://www.cnblogs.com/jianqingwang/category/1099729.html">react(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="https://www.cnblogs.com/jianqingwang/category/878466.html">thinkphp(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="https://www.cnblogs.com/jianqingwang/category/878467.html">yii(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="https://www.cnblogs.com/jianqingwang/category/876747.html">生活(2)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/jianqingwang/archive/2017/11.html">2017年11月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="https://www.cnblogs.com/jianqingwang/archive/2017/10.html">2017年10月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="https://www.cnblogs.com/jianqingwang/archive/2017/07.html">2017年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="https://www.cnblogs.com/jianqingwang/archive/2017/06.html">2017年6月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="https://www.cnblogs.com/jianqingwang/archive/2017/05.html">2017年5月 (23)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="https://www.cnblogs.com/jianqingwang/archive/2017/04.html">2017年4月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/jianqingwang/archive/2017/03.html">2017年3月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="https://www.cnblogs.com/jianqingwang/archive/2017/02.html">2017年2月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="https://www.cnblogs.com/jianqingwang/archive/2016/12.html">2016年12月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="https://www.cnblogs.com/jianqingwang/archive/2016/11.html">2016年11月 (22)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="https://www.cnblogs.com/jianqingwang/archive/2016/10.html">2016年10月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="https://www.cnblogs.com/jianqingwang/archive/2016/09.html">2016年9月 (28)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="https://www.cnblogs.com/jianqingwang/archive/2016/08.html">2016年8月 (8)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links868603" class="catList sidebar-block">
+<h3 class="catListTitle">Php</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://shang.qq.com/open_webaio.html?sigt=f8aa6c7a69d5730e2af38b3be5683aa599ebddb135dcc2ab6270a318ac54690ed7843fee1ee91b6458a8b8a7122aa2b7&amp;sigu=183848dbc4d6838e2d04e47eab6ed3c815a799c83a0638c9e61461c1a25ec84d921a150059e1f80b&amp;tuin=972069047" rel="nofollow">QQ联系我</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/jianqingwang/p/6978724.html#3863767">1. Re:Windows环境安装tesseract-ocr 4.00并配置环境变量</a></li>
+        <li class="recent_comment_body">语言包是放在  tessdata文件。。。。</li>
+        <li class="recent_comment_author">--willowj</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/jianqingwang/p/6978724.html#3863766">2. Re:Windows环境安装tesseract-ocr 4.00并配置环境变量</a></li>
+        <li class="recent_comment_body">语言包是方法 tessdata文件。。。。</li>
+        <li class="recent_comment_author">--willowj</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/jianqingwang/p/6978724.html#3764645">3. Re:Windows环境安装tesseract-ocr 4.00并配置环境变量</a></li>
+        <li class="recent_comment_body">多谢楼主分享</li>
+        <li class="recent_comment_author">--杜冰林</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/jianqingwang/p/5845334.html#3750468">4. Re:基于php实现购物车</a></li>
+        <li class="recent_comment_body">一年了还没贴出来吗</li>
+        <li class="recent_comment_author">--caisex</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/jianqingwang/p/6830892.html#3722533">5. Re:利用PHPExcel读取Excel的数据和导出数据到Excel</a></li>
+        <li class="recent_comment_body">你好遇到点问题,能加下我QQ好友我咨询下几个问题吗? 我的QQ468292155</li>
+        <li class="recent_comment_author">--王秋生</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/jianqingwang/p/6726589.html">1. Centos7:利用crontab定时执行任务(16511)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/5890111.html">2. PHP学习笔记:用mysqli连接数据库(15100)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/5839151.html">3. PHP学习笔记：删除与销毁session(12405)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/6978724.html">4. Windows环境安装tesseract-ocr 4.00并配置环境变量(11323)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/6723673.html">5. jquery 动态创建 DIV(11321)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/jianqingwang/p/6978724.html">1. Windows环境安装tesseract-ocr 4.00并配置环境变量(3)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/6908599.html">2. PHP网站自动化配置的实现(2)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/5778572.html">3. PhpStorm的open in browser怎么修改端口和相对路径(2)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/5860235.html">4. php学习笔记：利用递归实现删除文件目录(2)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/5944374.html">5. PHP学习笔记：keditor的使用(2)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/jianqingwang/p/6978724.html">1. Windows环境安装tesseract-ocr 4.00并配置环境变量(3)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/5955511.html">2. PHP学习笔记：通过curl实现采集网站内容(2)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/5949644.html">3. PHP学习笔记：伪静态规则的书写(1)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/5890111.html">4. PHP学习笔记:用mysqli连接数据库(1)</a></li><li><a href="https://www.cnblogs.com/jianqingwang/p/6640235.html">5. PHP工作笔记：遍历文件夹返回文件数组(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 简庆旺
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>

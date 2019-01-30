@@ -1,0 +1,38 @@
+# AOLApplyPlatform v1.0 Scheme
+
+Website Aspect:
+
++ AOLApplyPlatform
+	- public
+		- database
+		- error
+		- down
+		- log
+	- module
+		- table_gen
+	- admin
+		- home			# 显示功能菜单
+		- apply_detail
+			* print
+		- apply_list
+		- apply_handler
+			* edit
+			* delete
+			* print
+	- student
+		- home			# 显示已提交的申请列表
+		- apply_detail
+			* delete
+			* print
+		- apply_create
+	- teacher
+		- home			# 显示已提交的申请列表
+		- apply_detail
+			* update	# 可填写导师意见/课程组意见
+			* print
+		
+Data Aspect:
+
+	[Entity]AOLApply
+		Student Info(Name, StuNo, Gender, Tutor, ...)
+		Apply Info(ApplyGroup, ApplyLocation)

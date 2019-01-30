@@ -1,0 +1,13 @@
+﻿# Helicon ISAPI_Rewrite configuration file
+# Version 3.1.0.112
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+	
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule (.*) laravel/public/$1 [L]
+	
+    RewriteRule ^$ laravel/public/
+</IfModule>
